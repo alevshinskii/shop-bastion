@@ -70,6 +70,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
+.container {
+  margin-left: 12%;
+  margin-right: 12%;
+  width: 76%;
+}
+
 .root {
   font-family: "Fira Sans", sans-serif;
   background-color: #e6e6e6;

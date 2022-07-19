@@ -7,6 +7,7 @@ import ProductsTypes from "./pages/ProductsTypes";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
+import Cart from "./pages/Cart";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
@@ -19,6 +20,7 @@ root.render(
                 <Route path="/" element={<Home />} />
                 <Route path="products" element={<Products />} />
                 <Route path="products_types" element={<ProductsTypes />} />
+                <Route path="cart" element={<Cart />} />
             </Routes>
             <Footer />
         </Router>

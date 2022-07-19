@@ -74,10 +74,12 @@ function Header() {
             <div className="main-nav">
                 <div className="container">
                     <div className="left">
-                        <div className="brand">
-                            <img src={logoImage} alt="logo" />
-                            <h1>Производитель металлических изделий №1</h1>
-                        </div>
+                        <Link to="/">
+                            <div className="brand">
+                                <img src={logoImage} alt="logo" />
+                                <h1>Производитель металлических изделий №1</h1>
+                            </div>
+                        </Link>
                         <div className="catalog">
                             <div className="rect">
                                 <img src={catalogImage} alt="catalog" />
@@ -98,13 +100,15 @@ function Header() {
                     </div>
                     <div className="right">
                         <div className="favourite">
-                            <img src={favouriteImage}/>
+                            <img src={favouriteImage} />
                             <h3>Избранное</h3>
                         </div>
-                        <div className="cart">
-                            <img src={cartImage}></img>
-                            <h3>Корзина</h3>
-                        </div>
+                        <Link to="/cart">
+                            <div className="cart">
+                                <img src={cartImage}></img>
+                                <h3>Корзина</h3>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>

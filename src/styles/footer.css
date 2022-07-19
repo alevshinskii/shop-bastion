@@ -1,0 +1,22 @@
+.Footer {
+  margin-top: 200px;
+  background-color: #222628;
+}
+.Footer .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Footer .container .contact {
+  width: 100%;
+}
+.Footer .container .contact img {
+  width: 100%;
+  margin-top: -50px;
+}
+.Footer .container .footer {
+  width: 100%;
+}
+.Footer .container .footer img {
+  width: 100%;
+}/*# sourceMappingURL=footer.css.map */
