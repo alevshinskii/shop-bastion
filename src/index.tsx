@@ -12,13 +12,13 @@ const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );
 root.render(
-    <div>
+    <div className="root">
         <Router>
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="products" element={<Products />} />
-                <Route path="product_types" element={<ProductsTypes />} />
+                <Route path="products_types" element={<ProductsTypes />} />
             </Routes>
             <Footer />
         </Router>

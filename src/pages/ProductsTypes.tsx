@@ -4,7 +4,7 @@ import { useAppSelector } from "../hooks/redux";
 function ProductsTypes() {
     return (
         <div className="ProductsTypes">
-            <h1>ProductsTypes</h1>
+            <h1>Products Types</h1>
             
         </div>
     );
