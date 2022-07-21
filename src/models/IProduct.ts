@@ -8,4 +8,5 @@ export interface IProduct {
     gost: string;
     promo: boolean;
     hit: boolean;
+    image:string;
 }

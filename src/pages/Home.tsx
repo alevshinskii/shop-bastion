@@ -1,8 +1,5 @@
-import { request } from "https";
-import Range from "rc-slider";
-import "rc-slider/assets/index.css";
-import React from "react";
-import { reduceEachLeadingCommentRange } from "typescript";
+import { url } from "inspector";
+import Slider from "../components/Slider";
 import { useAppSelector } from "../hooks/redux";
 import "../styles/home.css";
 
@@ -21,6 +18,13 @@ function Home() {
 
     const { products } = useAppSelector((state) => state.productSlice);
     const { types } = useAppSelector((state) => state.productTypeSlice);
+
+    let minPrice = 999999999,
+        maxPrice = 0;
+    products.forEach((p) => {
+        if (p.price < minPrice) minPrice = p.price;
+        if (p.price > maxPrice) maxPrice = p.price;
+    });
 
     return (
         <div className="Home">
@@ -53,34 +57,8 @@ function Home() {
                         </div>
                         <div className="filter-price">
                             <div className="filter-price-name">Цена, руб.</div>
-                            <div className="inputs">
-                                <div className="from">
-                                    <label className="text">от</label>
-                                    <input placeholder="104" />
-                                </div>
-                                <div className="to">
-                                    <label className="text">до</label>
-                                    <input placeholder="9999" />
-                                </div>
-                            </div>
-                            <div className="slider">
-                                <Range
-                                    defaultValue={[104, 9999]}
-                                    count={10}
-                                    railStyle={{ backgroundColor: "#E6E6E6" }}
-                                    trackStyle={{ backgroundColor: "#C93E33" }}
-                                    handleStyle={{
-                                        backgroundColor: "#C93E33",
-                                        borderColor: "white",
-                                        opacity: 1,
-                                    }}
-                                    activeDotStyle={{
-                                        backgroundColor: "#C93E33",
-                                        border: "none",
-                                    }}
-                                    min={104}
-                                    max={9999}
-                                />
+                            <div className="slider-block">
+                                <Slider min={minPrice} max={maxPrice}/>
                                 <img src={sliderMarksImage} alt="" />
                             </div>
                         </div>
@@ -111,7 +89,7 @@ function Home() {
                         </div>
                         <div className="products-list">
                             {products.map((p) => (
-                                <div className="product">
+                                <div className="product" key={p.id}>
                                     <div className="promos">
                                         {p.hit ? (
                                             <div className="hit">Хит</div>
@@ -228,11 +206,7 @@ function Home() {
                         19537-83 или ее аналогом.
                     </p>
                     <a>
-                        Скрыть описание{" "}
-                        <img
-                            src={arrowHideImage}
-                            alt=""
-                        ></img>
+                        Скрыть описание <img src={arrowHideImage} alt=""></img>
                     </a>
                 </div>
             </div>

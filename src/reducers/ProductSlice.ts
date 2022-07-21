@@ -13,19 +13,21 @@ const initialState: ProductState = {
             id: 1,
             name: "Опора тавровая хомутовая ТХ",
             type: { id: 1, name: "Опора тавровая" },
-            price: 849.9,
+            price: 999,
             gost: "ГОСТ 14911-82",
             hit: true,
             promo: true,
+            image:"../content/item1.png",
         },
         {
             id: 2,
             name: "Опора корпусная приварная КП",
             type: { id: 2, name: "Опора корпусная" },
-            price: 849.9,
+            price: 104,
             gost: "ГОСТ 14911-82",
             hit: true,
             promo: true,
+            image:"../content/item1.png",
         },
         {
             id: 3,
@@ -35,6 +37,7 @@ const initialState: ProductState = {
             gost: "ГОСТ 14911-82",
             hit: true,
             promo: true,
+            image:"../content/item1.png",
         },
         {
             id: 4,
@@ -44,6 +47,7 @@ const initialState: ProductState = {
             gost: "ГОСТ 14911-82",
             hit: true,
             promo: true,
+            image:"../content/item1.png",
         },
         {
             id: 5,
@@ -53,6 +57,7 @@ const initialState: ProductState = {
             gost: "ГОСТ 14911-82",
             hit: true,
             promo: true,
+            image:"../content/item1.png",
         },
         {
             id: 6,
@@ -62,6 +67,7 @@ const initialState: ProductState = {
             gost: "ГОСТ 14911-82",
             hit: true,
             promo: true,
+            image:"../content/item1.png",
         },
         {
             id: 7,
@@ -71,6 +77,7 @@ const initialState: ProductState = {
             gost: "ГОСТ 14911-82",
             hit: true,
             promo: true,
+            image:"../content/item1.png",
         },
         {
             id: 8,
@@ -80,6 +87,7 @@ const initialState: ProductState = {
             gost: "ГОСТ 14911-82",
             hit: true,
             promo: true,
+            image:"../content/item1.png",
         },
         {
             id: 9,
@@ -89,6 +97,7 @@ const initialState: ProductState = {
             gost: "ГОСТ 14911-82",
             hit: true,
             promo: true,
+            image:"../content/item1.png",
         },
     ],
     isLoading: false,

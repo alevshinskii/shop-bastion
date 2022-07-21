@@ -1,0 +1,77 @@
+.Products .container .path {
+  display: flex;
+  align-items: center;
+  margin-top: 17px;
+  margin-bottom: 13px;
+}
+.Products .container .path label {
+  font-weight: 300;
+  font-size: 12px;
+  color: #b3b3b3;
+}
+.Products .container .path .current {
+  color: black;
+}
+.Products .container .path img {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.Products .container .page-name {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size: 30px;
+}
+.Products .container .page-name a {
+  display: flex;
+  align-items: center;
+}
+.Products .container .page-name img {
+  margin-right: 20px;
+}
+.Products .container .page-content {
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 200px;
+}
+.Products .container .page-content .input-group {
+  display: flex;
+  align-items: center;
+  padding: 15px 35px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.Products .container .page-content .input-group label {
+  display: block;
+  width: 10%;
+}
+.Products .container .page-content .input-group input, .Products .container .page-content .input-group select {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+  padding: 5px 10px;
+  width: 30%;
+  text-align: center;
+}
+.Products .container .page-content .add-btn {
+  padding: 15px 35px;
+}
+.Products .container .page-content .add-btn button {
+  background: #c93e33;
+  border-radius: 4px;
+  width: 40%;
+  color: white;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  font-weight: 500;
+  font-size: 15px;
+}
+.Products .container .page-content .add-btn button img {
+  margin-right: 15px;
+}/*# sourceMappingURL=add-product.css.map */
