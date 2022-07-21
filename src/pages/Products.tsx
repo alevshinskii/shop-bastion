@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { IProduct } from "../models/IProduct";
 import { IProductType } from "../models/IProductType";
+import {addProduct} from "../reducers/ProductSlice";
 import "../styles/add-product.css";
 
 function Products() {
@@ -17,7 +18,9 @@ function Products() {
     const { types } = useAppSelector((state) => state.productTypeSlice);
     const { products } = useAppSelector((state) => state.productSlice);
 
-    const addProduct = () => {
+    const dispatch = useAppDispatch();
+
+    const addProductBtnClick = () => {
         if (type && name && gost) {
             const selectedType = types.find(
                 (t) => t.id == type
@@ -47,6 +50,7 @@ function Products() {
             setName("");
             setPrice(1);
             setGost("");
+            dispatch(addProduct(product));
         }
     };
 
@@ -117,7 +121,7 @@ function Products() {
                         ></input>
                     </div>
                     <div className="add-btn">
-                        <button onClick={addProduct}>Добавить</button>
+                        <button onClick={addProductBtnClick}>Добавить</button>
                     </div>
                 </div>
             </div>

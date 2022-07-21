@@ -128,6 +128,7 @@
                         margin: 20px;
                         margin-top: 10px;
                         img {
+                            margin-top: 5px;
                             width: 80%;
                         }
                     }
@@ -284,21 +285,10 @@
                                 display: none;
                                 font-weight: 400;
                                 font-size: 18px;
-
-                                .plus {
-                                }
-                                .input {
-                                }
-                                .minus {
-                                }
                             }
                         }
                         .buy-menu {
                             display: none;
-                            .add {
-                            }
-                            .desc {
-                            }
                         }
 
                         &:hover {
@@ -431,14 +421,6 @@
                     background: #ffffff;
                     border: 1px solid #e6e6e6;
                     border-radius: 2px;
-                }
-                .arrow-left {
-                    img {
-                    }
-                }
-                .arrow-right {
-                    img {
-                    }
                 }
                 .page {
                     padding: 10px 15px;

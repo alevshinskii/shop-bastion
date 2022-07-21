@@ -23,11 +23,12 @@ function Slider(_props: SliderProps): React.ReactElement | null {
     function updateProgress() {
         if (range) {
             range.style.right =
-                100 - (Number(range.value) / _props.max) * 100 + 3 + "%";
+                100 - (Number(max) / _props.max) * 100  + "%";
             range.style.left =
-                (Number(range.value) / _props.max) * 100 - 5 + "%";
+                (Number(min) / _props.max) * 100  + "%";
+
+            console.log();
         }
-        console.log(range)
     }
 
     function changeMin(e: React.ChangeEvent<HTMLInputElement>) {
