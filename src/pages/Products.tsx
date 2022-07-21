@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { IProduct } from "../models/IProduct";
 import { IProductType } from "../models/IProductType";
-import {addProduct} from "../reducers/ProductSlice";
+import { addProduct } from "../reducers/ProductSlice";
 import "../styles/add-product.css";
 
 function Products() {
@@ -30,12 +30,12 @@ function Products() {
                 name
                     .toLowerCase()
                     .split("")
-                    .find((l) => l == "a") != undefined;
+                    .find((l) => l == "о") != undefined;
             const promo =
                 name
                     .toLowerCase()
                     .split("")
-                    .find((l) => l == "о") != undefined;
+                    .find((l) => l == "а") != undefined;
 
             const product: IProduct = {
                 id: products.length,

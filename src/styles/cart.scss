@@ -107,6 +107,7 @@
                             width: 60%;
 
                             .plus {
+                                cursor: pointer;
                                 position: absolute;
                                 border-right: 1px solid #e6e6e6;
                                 padding: 6px 10px;
@@ -123,6 +124,7 @@
                                 }
                             }
                             .minus {
+                                cursor: pointer;
                                 border-left: 1px solid #e6e6e6;
                                 position: absolute;
                                 right: 0;
@@ -138,6 +140,7 @@
                         text-align: end;
                     }
                     .item-delete {
+                        cursor: pointer;
                         width: 10%;
                         display: flex;
                         justify-content: center;
@@ -146,6 +149,7 @@
                 }
 
                 .clear-cart {
+                    cursor: pointer;
                     font-weight: 400;
                     font-size: 15px;
                     color: #c93e33;
@@ -259,6 +263,17 @@
                         }
                     }
                 }
+            }
+
+            
+        }
+        .empty-cart{
+            padding: 20px 30px;
+            font-size: 24px;
+            font-weight: 500;
+            background-color: white;
+            a{
+                color: #c93e33;
             }
         }
     }

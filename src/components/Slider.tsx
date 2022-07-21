@@ -23,9 +23,9 @@ function Slider(_props: SliderProps): React.ReactElement | null {
     function updateProgress() {
         if (range) {
             range.style.right =
-                100 - (Number(max) / _props.max) * 100  + "%";
+                100 - ((Number(max)-_props.min) / (_props.max-_props.min)) * 100  + "%";
             range.style.left =
-                (Number(min) / _props.max) * 100  + "%";
+                ((Number(min)-_props.min) / (_props.max-_props.min)) * 100  + "%";
 
             console.log();
         }

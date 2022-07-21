@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IProductType } from "../models/IProductType";
 
 interface ProductTypeState {
@@ -21,7 +21,18 @@ const initialState: ProductTypeState = {
 export const productTypeSlice = createSlice({
     name: "type",
     initialState,
-    reducers: {},
+    reducers: {
+        addType(state, action: PayloadAction<IProductType>){
+            state.types.push(action.payload)
+        }
+    },
 });
 
-export default productTypeSlice.reducer;
+// Извлекаем объект с создателями и редуктор
+const { actions, reducer } = productTypeSlice;
+// Извлекаем и экспортируем каждого создателя по названию
+export const {
+    addType
+} = actions;
+// Экпортируем редуктор по умолчанию или по названию
+export default reducer;

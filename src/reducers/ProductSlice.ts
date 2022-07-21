@@ -115,11 +115,11 @@ const productSlice = createSlice({
 
     },
 });
-// Извлекаем объект с создателями и редуктор
+
 const { actions, reducer } = productSlice;
-// Извлекаем и экспортируем каждого создателя по названию
+
 export const {
   addProduct
 } = actions;
-// Экпортируем редуктор по умолчанию или по названию
+
 export default reducer;
