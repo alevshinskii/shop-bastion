@@ -72,7 +72,7 @@ function Cart() {
                                     </div>
                                     <div className="item-text">
                                         <div className="gost">
-                                            <label>{i.product.gost}</label>
+                                            <label>{i.product.gost.name}</label>
                                         </div>
                                         <div className="name">
                                             {i.product.name}

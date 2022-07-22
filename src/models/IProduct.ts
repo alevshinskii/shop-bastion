@@ -1,3 +1,4 @@
+import { IGost } from "./IGost";
 import { IProductType } from "./IProductType";
 
 export interface IProduct {
@@ -5,7 +6,7 @@ export interface IProduct {
     name: string;
     type: IProductType;
     price: number;
-    gost: string;
+    gost: IGost;
     promo: boolean;
     hit: boolean;
     image:string;

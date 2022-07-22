@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import Slider from "../components/Slider";
 import { useAppSelector, useAppDispatch } from "../hooks/redux";
@@ -7,10 +6,17 @@ import {
     increaseItemQuantity,
     decreaseItemQuantity,
     addItem,
-    removeItem,
-    clearCart,
 } from "../reducers/CartSlice";
 import { ICartItem } from "../models/ICartItem";
+import { IProduct } from "../models/IProduct";
+import {
+    toggleGostFilter,
+    toggleTypeFilter,
+    updatePriceFilter,
+    resetFilters,
+} from "../reducers/FilterSlice";
+import { ITypeFilter } from "../models/ITypeFilter";
+import { IGostFilter } from "../models/IGostFilter";
 
 function Home() {
     const arrowImage = require("../images/arrow.svg").default;
@@ -28,9 +34,10 @@ function Home() {
     const { products } = useAppSelector((state) => state.productSlice);
     const { types } = useAppSelector((state) => state.productTypeSlice);
     const { cart } = useAppSelector((state) => state.cartSlice);
+    const { filter } = useAppSelector((state) => state.filterSlice);
     const dispatch = useAppDispatch();
 
-    let minPrice = 999999999,
+    let minPrice = Number.MAX_VALUE,
         maxPrice = 0;
     products.forEach((p) => {
         if (p.price < minPrice) minPrice = p.price;
@@ -41,6 +48,60 @@ function Home() {
         return cart.items.find((i) => i.product.id === id) !== undefined;
     }
 
+    function getFilteredProducts(products: IProduct[]) {
+        let isAllTypeFiltersDisabled = true;
+        for (let i = 0; i < filter.type.length; i++) {
+            if (filter.type[i].use) {
+                isAllTypeFiltersDisabled = false;
+                break;
+            }
+        }
+        let isAllGostFiltersDisabled = true;
+        for (let i = 0; i < filter.gost.length; i++) {
+            if (filter.gost[i].use) {
+                isAllGostFiltersDisabled = false;
+                break;
+            }
+        }
+
+        let filtered = products
+            .filter(
+                (p) =>
+                    p.price >= filter.price.min && p.price <= filter.price.max
+            )
+            .filter(
+                (p) =>
+                    isAllTypeFiltersDisabled ||
+                    filter.type.find((t) => t.type.id === p.type.id)?.use
+            )
+            .filter(
+                (p) =>
+                    isAllGostFiltersDisabled ||
+                    filter.gost.find((g) => g.gost.id === p.gost.id)?.use
+            );
+
+        return filtered;
+    }
+
+    function resetAllFilters() {
+        let clearedPriceFilter = { min: minPrice, max: maxPrice };
+        let clearedTypeFilters: ITypeFilter[] = [];
+        filter.type.map((t) =>
+            clearedTypeFilters.push({ type: t.type, use: false })
+        );
+        let clearedGostFilters: IGostFilter[] = [];
+        filter.gost.map((g) =>
+            clearedGostFilters.push({ gost: g.gost, use: false })
+        );
+
+        dispatch(
+            resetFilters({
+                price: clearedPriceFilter,
+                type: clearedTypeFilters,
+                gost: clearedGostFilters,
+            })
+        );
+    }
     return (
         <div className="Home">
             <div className="container">
@@ -80,30 +141,50 @@ function Home() {
                         <div className="filter-type">
                             <div className="filter-type-name">Тип продукта</div>
                             <div className="inputs">
-                                {types.map((t) => (
-                                    <div className="check" key={t.id}>
+                                {filter.type.map((t) => (
+                                    <div
+                                        className="check"
+                                        key={t.type.id}
+                                        onClick={() =>
+                                            dispatch(
+                                                toggleTypeFilter(t.type.id)
+                                            )
+                                        }
+                                    >
                                         <input
                                             type={"checkbox"}
-                                            name={String(t.id)}
-                                            placeholder={t.name}
+                                            name={String(t.type.id)}
+                                            placeholder={t.type.name}
+                                            checked={t.use}
                                         />
-                                        <label>{t.name}</label>
+                                        <label>{t.type.name}</label>
                                     </div>
                                 ))}
                             </div>
                         </div>
                         <div className="filter-reset">
-                            <button>Сбросить фильтры</button>
+                            <button onClick={() => resetAllFilters()}>
+                                Сбросить фильтры
+                            </button>
                         </div>
                     </div>
                     <div className="products">
                         <div className="gosts">
-                            <div className="rect selected">ГОСТ 14911-82</div>
-                            <div className="rect">ОСТ 36-146-88</div>
-                            <div className="rect">НТС 65-06</div>
+                            {filter.gost.map((g) => (
+                                <div
+                                    className={g.use ? "rect selected" : "rect"}
+                                    key={g.gost.id}
+                                    onClick={() =>
+                                        dispatch(toggleGostFilter(g.gost.id))
+                                    }
+                                >
+                                    {g.gost.name}
+                                </div>
+                            ))}
                         </div>
+                        
                         <div className="products-list">
-                            {products.map((p) => (
+                            {getFilteredProducts(products).map((p) => (
                                 <div className="product" key={p.id}>
                                     <div className="promos">
                                         {p.hit ? (
@@ -122,7 +203,7 @@ function Home() {
                                     </div>
                                     <div className="gost">
                                         <div className="gost-rect">
-                                            <label>{p.gost}</label>
+                                            <label>{p.gost.name}</label>
                                         </div>
                                     </div>
                                     <div className="name">{p.name}</div>
@@ -177,7 +258,16 @@ function Home() {
                                     <div className="buy-menu">
                                         {!isProductInCart(p.id) ? (
                                             <div className="add">
-                                                <button onClick={()=>dispatch(addItem({product:p,quantity:1} as ICartItem))}>
+                                                <button
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            addItem({
+                                                                product: p,
+                                                                quantity: 1,
+                                                            } as ICartItem)
+                                                        )
+                                                    }
+                                                >
                                                     <img
                                                         src={addToCartImage}
                                                         alt=""
@@ -188,9 +278,9 @@ function Home() {
                                         ) : (
                                             <div className="add">
                                                 <Link to="cart">
-                                                <button>
-                                                    Перейти в корзину
-                                                </button>
+                                                    <button>
+                                                        Перейти в корзину
+                                                    </button>
                                                 </Link>
                                             </div>
                                         )}

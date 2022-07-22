@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { collapseTextChangeRangesAcrossMultipleVersions } from "typescript";
-import { useAppSelector } from "../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../hooks/redux";
+import { setMaxPrice, setMinPrice, updatePriceFilter } from "../reducers/FilterSlice";
 import "../styles/slider.css";
 
 export interface SliderProps {
@@ -9,10 +10,15 @@ export interface SliderProps {
 }
 
 function Slider(_props: SliderProps): React.ReactElement | null {
-    const [min, setMin] = useState(_props.min);
-    const [max, setMax] = useState(_props.max);
+    
+    const { filter } = useAppSelector((state) => state.filterSlice);
+    const dispatch=useAppDispatch();
 
-    const gap = 100;
+    const min=filter.price.min;
+    const max=filter.price.max;
+
+    const gap = +((_props.max-_props.min)/10).toFixed(0);
+
 
     const rangeInput: NodeListOf<HTMLInputElement> =
             document.querySelectorAll(".range-input input"),
@@ -23,33 +29,34 @@ function Slider(_props: SliderProps): React.ReactElement | null {
     function updateProgress() {
         if (range) {
             range.style.right =
-                100 - ((Number(max)-_props.min) / (_props.max-_props.min)) * 100  + "%";
+                100 -
+                ((Number(max) - _props.min) / (_props.max - _props.min)) * 100 +
+                "%";
             range.style.left =
-                ((Number(min)-_props.min) / (_props.max-_props.min)) * 100  + "%";
-
-            console.log();
+                ((Number(min) - _props.min) / (_props.max - _props.min)) * 100 +
+                "%";
         }
     }
 
     function changeMin(e: React.ChangeEvent<HTMLInputElement>) {
         if (max - min >= gap) {
-            setMin(Number(e.target.value));
+            dispatch(setMinPrice(Number(e.target.value)));
         } else {
-            if (min + gap <= _props.max) setMax(min + gap);
-            else setMin(_props.max - gap);
+            if (min + gap <= _props.max) dispatch(setMaxPrice(min + gap));
+            else dispatch(setMinPrice(_props.max - gap));
         }
         updateProgress();
     }
     function changeMax(e: React.ChangeEvent<HTMLInputElement>) {
         if (max - min >= gap) {
-            setMax(Number(e.target.value));
+            dispatch(setMaxPrice(Number(e.target.value)));
         } else {
-            if (max - gap >= _props.min) setMin(max - gap);
-            else setMax(_props.min + gap);
+            if (max - gap >= _props.min) dispatch(setMinPrice(max - gap));
+            else dispatch(setMaxPrice(_props.min + gap));
         }
-        updateProgress();
+        
     }
-
+    updateProgress();
     return (
         <div className="slider-component">
             <div className="inputs">

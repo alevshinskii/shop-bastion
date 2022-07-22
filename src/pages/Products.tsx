@@ -4,42 +4,52 @@ import { useAppDispatch, useAppSelector } from "../hooks/redux";
 import { IProduct } from "../models/IProduct";
 import { IProductType } from "../models/IProductType";
 import { addProduct } from "../reducers/ProductSlice";
+import { addGostFilter, updatePriceFilter } from "../reducers/FilterSlice";
 import "../styles/add-product.css";
 
 function Products() {
     const arrowImage = require("../images/arrow.svg").default;
     const arrowBackImage = require("../images/arrow-back.svg").default;
 
-    const [name, setName] = useState("");
+    const [nameString, setName] = useState("");
     const [type, setType] = useState(1);
     const [price, setPrice] = useState(1);
-    const [gost, setGost] = useState("");
+    const [gostString, setGost] = useState("");
 
     const { types } = useAppSelector((state) => state.productTypeSlice);
     const { products } = useAppSelector((state) => state.productSlice);
+    const { filter } = useAppSelector((state) => state.filterSlice);
 
     const dispatch = useAppDispatch();
 
     const addProductBtnClick = () => {
-        if (type && name && gost) {
+        if (type && nameString && gostString) {
             const selectedType = types.find(
                 (t) => t.id == type
             ) as IProductType;
 
             const hit =
-                name
+                nameString
                     .toLowerCase()
                     .split("")
                     .find((l) => l == "о") != undefined;
             const promo =
-                name
+                nameString
                     .toLowerCase()
                     .split("")
                     .find((l) => l == "а") != undefined;
 
+            let gost = filter.gost.find(
+                (g) => g.gost.name === gostString
+            )?.gost;
+            if (!gost) {
+                gost = { id: filter.gost.length + 1, name: gostString };
+                dispatch(addGostFilter({ gost, use: false }));
+            }
+
             const product: IProduct = {
-                id: products.length,
-                name,
+                id: products.length + 1,
+                name: nameString,
                 type: selectedType,
                 price,
                 gost,
@@ -51,6 +61,14 @@ function Products() {
             setPrice(1);
             setGost("");
             dispatch(addProduct(product));
+            if (price > filter.price.max)
+                dispatch(
+                    updatePriceFilter({ min: filter.price.min, max: price })
+                );
+            if (price < filter.price.min)
+                dispatch(
+                    updatePriceFilter({ min: price, max: filter.price.max })
+                );
         }
     };
 
@@ -76,7 +94,7 @@ function Products() {
                     <div className="input-group">
                         <label>Название</label>
                         <input
-                            value={name}
+                            value={nameString}
                             onChange={(e) => {
                                 setName(e.target.value);
                             }}
@@ -114,7 +132,7 @@ function Products() {
                     <div className="input-group">
                         <label>ГОСТ</label>
                         <input
-                            value={gost}
+                            value={gostString}
                             onChange={(e) => {
                                 setGost(e.target.value);
                             }}

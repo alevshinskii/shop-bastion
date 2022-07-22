@@ -172,6 +172,7 @@
   height: -moz-fit-content;
   height: fit-content;
   margin-top: 30px;
+  margin-bottom: 30px;
   padding: 15px;
   font-weight: 400;
   font-size: 15px;
@@ -218,6 +219,7 @@
   align-items: center;
   padding: 15px;
   width: 100%;
+  height: 50px;
   font-weight: 400;
   font-size: 10px;
 }
@@ -275,15 +277,38 @@
   padding: 20px;
   padding-top: 5px;
   padding-bottom: 30px;
+  justify-content: space-between;
 }
 .Home .container .page-content .products .products-list .product .price .price-amount {
   font-weight: 700;
   font-size: 15px;
 }
 .Home .container .page-content .products .products-list .product .price .quantity {
-  display: none;
   font-weight: 400;
   font-size: 18px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 40%;
+}
+.Home .container .page-content .products .products-list .product .price .quantity .plus {
+  position: absolute;
+  border-right: 1px solid #e6e6e6;
+  padding: 6px 10px;
+}
+.Home .container .page-content .products .products-list .product .price .quantity .input input {
+  padding: 6px;
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 2px;
+  width: 100%;
+  text-align: center;
+}
+.Home .container .page-content .products .products-list .product .price .quantity .minus {
+  border-left: 1px solid #e6e6e6;
+  position: absolute;
+  right: 0;
+  padding: 6px 10px;
 }
 .Home .container .page-content .products .products-list .product .buy-menu {
   display: none;
@@ -292,37 +317,9 @@
   position: relative;
   box-shadow: 0px 0 12px 4px rgba(0, 0, 0, 0.1);
 }
-.Home .container .page-content .products .products-list .product:hover .price {
-  justify-content: space-between;
-}
-.Home .container .page-content .products .products-list .product:hover .price .quantity {
-  position: relative;
-  display: block;
-  display: flex;
-  align-items: center;
-  width: 40%;
-}
-.Home .container .page-content .products .products-list .product:hover .price .quantity .plus {
-  position: absolute;
-  border-right: 1px solid #e6e6e6;
-  padding: 6px 10px;
-}
-.Home .container .page-content .products .products-list .product:hover .price .quantity .input input {
-  padding: 6px;
-  background: #ffffff;
-  border: 1px solid #e6e6e6;
-  border-radius: 2px;
-  width: 100%;
-  text-align: center;
-}
-.Home .container .page-content .products .products-list .product:hover .price .quantity .minus {
-  border-left: 1px solid #e6e6e6;
-  position: absolute;
-  right: 0;
-  padding: 6px 10px;
-}
 .Home .container .page-content .products .products-list .product:hover .buy-menu {
   position: absolute;
+  z-index: 10;
   bottom: -130px;
   background-color: white;
   padding-top: 20px;

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../hooks/redux";
 import { IProductType } from "../models/IProductType";
+import { addTypeFilter } from "../reducers/FilterSlice";
 import { addType } from "../reducers/ProductTypeSlice";
 import "../styles/add-product-type.css";
 
@@ -16,11 +17,12 @@ function ProductsTypes() {
 
     const addProductType = () => {
         const productType: IProductType = {
-            id: types.length,
+            id: types.length + 1,
             name,
         };
         setName("");
-        dispatch(addType(productType))
+        dispatch(addType(productType));
+        dispatch(addTypeFilter({ type: productType, use: false }));
     };
 
     return (
