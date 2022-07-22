@@ -1,7 +1,16 @@
-import { url } from "inspector";
+
+import { Link } from "react-router-dom";
 import Slider from "../components/Slider";
-import { useAppSelector } from "../hooks/redux";
+import { useAppSelector, useAppDispatch } from "../hooks/redux";
 import "../styles/home.css";
+import {
+    increaseItemQuantity,
+    decreaseItemQuantity,
+    addItem,
+    removeItem,
+    clearCart,
+} from "../reducers/CartSlice";
+import { ICartItem } from "../models/ICartItem";
 
 function Home() {
     const arrowImage = require("../images/arrow.svg").default;
@@ -18,6 +27,8 @@ function Home() {
 
     const { products } = useAppSelector((state) => state.productSlice);
     const { types } = useAppSelector((state) => state.productTypeSlice);
+    const { cart } = useAppSelector((state) => state.cartSlice);
+    const dispatch = useAppDispatch();
 
     let minPrice = 999999999,
         maxPrice = 0;
@@ -25,6 +36,10 @@ function Home() {
         if (p.price < minPrice) minPrice = p.price;
         if (p.price > maxPrice) maxPrice = p.price;
     });
+
+    function isProductInCart(id: number) {
+        return cart.items.find((i) => i.product.id === id) !== undefined;
+    }
 
     return (
         <div className="Home">
@@ -58,7 +73,7 @@ function Home() {
                         <div className="filter-price">
                             <div className="filter-price-name">Цена, руб.</div>
                             <div className="slider-block">
-                                <Slider min={minPrice} max={maxPrice}/>
+                                <Slider min={minPrice} max={maxPrice} />
                                 <img src={sliderMarksImage} alt="" />
                             </div>
                         </div>
@@ -115,24 +130,71 @@ function Home() {
                                         <div className="price-amount">
                                             {p.price} руб.
                                         </div>
-                                        <div className="quantity">
-                                            <div className="plus">+</div>
-                                            <div className="input">
-                                                <input value={1} />
+
+                                        {isProductInCart(p.id) ? (
+                                            <div className="quantity">
+                                                <div
+                                                    className="plus"
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            increaseItemQuantity(
+                                                                p.id
+                                                            )
+                                                        )
+                                                    }
+                                                >
+                                                    +
+                                                </div>
+                                                <div className="input">
+                                                    <input
+                                                        value={
+                                                            cart.items.find(
+                                                                (i) =>
+                                                                    i.product
+                                                                        .id ===
+                                                                    p.id
+                                                            )?.quantity
+                                                        }
+                                                    />
+                                                </div>
+                                                <div
+                                                    className="minus"
+                                                    onClick={() =>
+                                                        dispatch(
+                                                            decreaseItemQuantity(
+                                                                p.id
+                                                            )
+                                                        )
+                                                    }
+                                                >
+                                                    -
+                                                </div>
                                             </div>
-                                            <div className="minus">-</div>
-                                        </div>
+                                        ) : (
+                                            <div className="quantity"></div>
+                                        )}
                                     </div>
                                     <div className="buy-menu">
-                                        <div className="add">
-                                            <button>
-                                                <img
-                                                    src={addToCartImage}
-                                                    alt=""
-                                                ></img>
-                                                В корзину
-                                            </button>
-                                        </div>
+                                        {!isProductInCart(p.id) ? (
+                                            <div className="add">
+                                                <button onClick={()=>dispatch(addItem({product:p,quantity:1} as ICartItem))}>
+                                                    <img
+                                                        src={addToCartImage}
+                                                        alt=""
+                                                    ></img>
+                                                    В корзину
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <div className="add">
+                                                <Link to="cart">
+                                                <button>
+                                                    Перейти в корзину
+                                                </button>
+                                                </Link>
+                                            </div>
+                                        )}
+
                                         <div className="desc">
                                             <button>Подробнее</button>
                                         </div>

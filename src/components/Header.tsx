@@ -18,6 +18,8 @@ function Header() {
     const cartImage = require("../images/cart.svg").default;
     const favouriteImage = require("../images/favourite.svg").default;
 
+    const { cart } = useAppSelector((state) => state.cartSlice);
+
     return (
         <div className="Header">
             <div className="nav">
@@ -107,6 +109,11 @@ function Header() {
                             <div className="cart">
                                 <img src={cartImage}></img>
                                 <h3>Корзина</h3>
+                                {cart.items.length ? (
+                                    <label>{cart.items.length}</label>
+                                ) : (
+                                    ""
+                                )}
                             </div>
                         </Link>
                     </div>

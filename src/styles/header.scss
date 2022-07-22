@@ -1,5 +1,3 @@
-
-
 .Header {
     .nav {
         .container {
@@ -72,11 +70,11 @@
         background-color: white;
         .container {
             height: 110px;
-            
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            .left{
+            .left {
                 width: 80%;
                 display: flex;
                 align-items: center;
@@ -95,18 +93,18 @@
                     }
                 }
                 .catalog {
-                    .rect{
+                    .rect {
                         padding: 12px 20px;
                         display: flex;
                         align-items: center;
-                        
-                        background: #C93E33;
+
+                        background: #c93e33;
                         border-radius: 4px;
                         color: white;
-        
+
                         height: 42px;
-    
-                        h2{
+
+                        h2 {
                             margin-left: 15px;
                             margin-right: 15px;
                             font-weight: 500;
@@ -119,64 +117,79 @@
                     display: flex;
                     align-items: center;
                     margin-left: 20px;
-                    
+
                     width: 100%;
-                    .search-icon{
-                        border-top: 1px solid #E6E6E6;
-                        border-left: 1px solid #E6E6E6;
-                        border-bottom: 1px solid #E6E6E6;
+                    .search-icon {
+                        border-top: 1px solid #e6e6e6;
+                        border-left: 1px solid #e6e6e6;
+                        border-bottom: 1px solid #e6e6e6;
                         border-radius: 4px;
                         padding: 13px 17px;
                     }
-                    .search-input{
+                    .search-input {
                         width: 100%;
-                        border-top: 1px solid #E6E6E6;
-                        border-bottom: 1px solid #E6E6E6;
+                        border-top: 1px solid #e6e6e6;
+                        border-bottom: 1px solid #e6e6e6;
                         padding: 13px;
                         margin-left: -4px;
                         margin-right: -4px;
                         background-color: white;
                         z-index: 10;
-                        input{
-                            &::placeholder{
+                        input {
+                            &::placeholder {
                                 font-style: normal;
                                 font-weight: 300;
                                 font-size: 15px;
 
-                                color: #B3B3B3;
+                                color: #b3b3b3;
                             }
                         }
                     }
-                    .search-enter{
-                        border-top: 1px solid #E6E6E6;
-                        border-right: 1px solid #E6E6E6;
-                        border-bottom: 1px solid #E6E6E6;
+                    .search-enter {
+                        border-top: 1px solid #e6e6e6;
+                        border-right: 1px solid #e6e6e6;
+                        border-bottom: 1px solid #e6e6e6;
                         border-radius: 4px;
                         padding: 11px 17px;
                     }
                 }
             }
-            .right{
+            .right {
                 display: flex;
                 align-items: center;
                 .favourite {
-                    
                     margin-left: 36px;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
-                    img{
+                    img {
                         margin-bottom: 5px;
                     }
                 }
                 .cart {
+                    position: relative;
                     margin-left: 36px;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     color: black;
-                    img{
+                    img {
                         margin-bottom: 5px;
+                    }
+                    label {
+                        position: absolute;
+                        right: 10px;
+                        top: -5px;
+                        background-color: #c93e33;
+                        border: 2px solid #ffffff;
+                        color: #efefef;
+                        font-weight: 600;
+                        font-size: 8px;
+                        border-radius: 50%;
+                        padding: 3px 4px 2px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                     }
                 }
             }

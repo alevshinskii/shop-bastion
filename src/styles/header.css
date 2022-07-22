@@ -92,7 +92,7 @@
   padding: 12px 20px;
   display: flex;
   align-items: center;
-  background: #C93E33;
+  background: #c93e33;
   border-radius: 4px;
   color: white;
   height: 42px;
@@ -111,16 +111,16 @@
   width: 100%;
 }
 .Header .main-nav .container .left .search .search-icon {
-  border-top: 1px solid #E6E6E6;
-  border-left: 1px solid #E6E6E6;
-  border-bottom: 1px solid #E6E6E6;
+  border-top: 1px solid #e6e6e6;
+  border-left: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
   border-radius: 4px;
   padding: 13px 17px;
 }
 .Header .main-nav .container .left .search .search-input {
   width: 100%;
-  border-top: 1px solid #E6E6E6;
-  border-bottom: 1px solid #E6E6E6;
+  border-top: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
   padding: 13px;
   margin-left: -4px;
   margin-right: -4px;
@@ -131,24 +131,24 @@
   font-style: normal;
   font-weight: 300;
   font-size: 15px;
-  color: #B3B3B3;
+  color: #b3b3b3;
 }
 .Header .main-nav .container .left .search .search-input input:-ms-input-placeholder {
   font-style: normal;
   font-weight: 300;
   font-size: 15px;
-  color: #B3B3B3;
+  color: #b3b3b3;
 }
 .Header .main-nav .container .left .search .search-input input::placeholder {
   font-style: normal;
   font-weight: 300;
   font-size: 15px;
-  color: #B3B3B3;
+  color: #b3b3b3;
 }
 .Header .main-nav .container .left .search .search-enter {
-  border-top: 1px solid #E6E6E6;
-  border-right: 1px solid #E6E6E6;
-  border-bottom: 1px solid #E6E6E6;
+  border-top: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
   border-radius: 4px;
   padding: 11px 17px;
 }
@@ -166,6 +166,7 @@
   margin-bottom: 5px;
 }
 .Header .main-nav .container .right .cart {
+  position: relative;
   margin-left: 36px;
   display: flex;
   flex-direction: column;
@@ -174,4 +175,19 @@
 }
 .Header .main-nav .container .right .cart img {
   margin-bottom: 5px;
+}
+.Header .main-nav .container .right .cart label {
+  position: absolute;
+  right: 10px;
+  top: -5px;
+  background-color: #c93e33;
+  border: 2px solid #ffffff;
+  color: #efefef;
+  font-weight: 600;
+  font-size: 8px;
+  border-radius: 50%;
+  padding: 3px 4px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }/*# sourceMappingURL=header.css.map */
