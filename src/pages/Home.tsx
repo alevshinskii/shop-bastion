@@ -176,6 +176,7 @@ function Home() {
                                             placeholder={t.type.name}
                                             checked={t.use}
                                         />
+                                        <span className="checkmark"></span>
                                         <label>{t.type.name}</label>
                                     </div>
                                 ))}

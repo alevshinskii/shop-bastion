@@ -147,13 +147,57 @@
                         .check {
                             margin-bottom: 10px;
                             display: flex;
-                            align-items: center;
+                            align-items: flex-end;
+                            position: relative;
+                            padding-left: 28px;
+                            margin-bottom: 12px;
+                            height: 18px;
+                            cursor: pointer;
+                            -webkit-user-select: none;
+                            -moz-user-select: none;
+                            -ms-user-select: none;
+                            user-select: none;
                             input {
                                 margin-right: 10px;
+                                position: absolute;
+                                opacity: 0;
+                                cursor: pointer;
+                                height: 0;
+                                width: 0;
+                                
+                            }
+                            input:checked ~ .checkmark:after {
+                                display: block;
+                              }
+                            .checkmark {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                height: 18px;
+                                width: 18px;
+                                background: #ffffff;
+                                border: 1px solid #e6e6e6;
+                                border-radius: 2px;
+                                &:after {
+                                    content: "";
+                                    position: absolute;
+                                    display: none;
+                                  }
+                                &:after {
+                                    left: 3px;
+                                    top: 3px;
+                                    width: 10px;
+                                    height: 10px;
+                                    border: solid #c93e33;
+                                    border-width: 0 3px 3px 0;
+                                    background-color: #c93e33;
+                                    border-radius: 2px;
+                                  }
                             }
                             label {
                                 font-weight: 400;
                                 font-size: 15px;
+                                cursor: pointer;
                             }
                         }
                     }
@@ -169,8 +213,8 @@
                         border: 1px solid #e6e6e6;
                         border-radius: 4px;
                         height: fit-content;
-                        margin-top: 30px;
-                        margin-bottom: 30px;
+                        margin-top: 18px;
+                        margin-bottom: 18px;
                         padding: 15px;
                         font-weight: 400;
                         font-size: 15px;
@@ -573,7 +617,7 @@
                     }
                     .msg-content-actions {
                         display: flex;
-                        align-items:flex-end;
+                        align-items: flex-end;
                         justify-content: space-between;
                         & > * {
                             width: 48%;
@@ -584,7 +628,7 @@
                                 padding: 15px 35px;
                                 border-radius: 4px;
                                 text-align: center;
-                                .text-box{
+                                .text-box {
                                     width: 100%;
                                 }
                                 height: 50px;
