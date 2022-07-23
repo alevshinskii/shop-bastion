@@ -1,7 +1,7 @@
 {
   "name": "shop-bastion",
   "version": "0.1.0",
-  "homepage": "https://alevshinskii.github.io",
+  "homepage": "https://alevshinskii.github.io/shop-bastion",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",

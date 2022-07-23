@@ -56,7 +56,7 @@ function Slider(_props: SliderProps): React.ReactElement | null {
         }
         
     }
-    updateProgress();
+    updateProgress()
     return (
         <div className="slider-component">
             <div className="inputs">
