@@ -113,15 +113,12 @@ function Home() {
     function openFullscreenMsg(msg: HTMLDivElement | null) {
         if (msg) {
             msg.classList.add("displayed");
-
-            console.log(msg.classList);
         }
     }
     function closeFullscreenMsg(msg: HTMLDivElement | null) {
         if (msg) {
             msg.classList.remove("displayed");
         }
-        console.log("close");
     }
 
     return (
@@ -413,7 +410,7 @@ function Home() {
                     )
                 }
             >
-                <div className="msg">
+                <div className="msg" onClick={(e) => e.stopPropagation()}>
                     <div className="msg-title">
                         <div className="msg-title-text">
                             Товар добавлен в корзину

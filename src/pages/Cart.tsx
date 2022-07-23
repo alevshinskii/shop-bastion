@@ -28,23 +28,40 @@ function Cart() {
     const [org, setOrg] = useState("");
 
     const { cart } = useAppSelector((state) => state.cartSlice);
-    const dispatch=useAppDispatch();
+    const dispatch = useAppDispatch();
 
-    function createOrder(){
-        if(name && tel && email){
-            const total=+cart.items.reduce((prev, cur) => prev + cur.product.price * cur.quantity, 0).toFixed(1);
-            const order:IOrder={
-                id:Date.now(),
+    function createOrder() {
+        if (name && tel && email) {
+            const total = +cart.items
+                .reduce(
+                    (prev, cur) => prev + cur.product.price * cur.quantity,
+                    0
+                )
+                .toFixed(1);
+            const order: IOrder = {
+                id: Date.now(),
                 name,
                 tel,
                 email,
-                org:org,
+                org: org,
                 cart,
                 total,
-            }
-            console.log(order)
+            };
+            openFullscreenMsg(document.querySelector(".fullscreen-msg"));
+            console.log(order);
         }
     }
+    function openFullscreenMsg(msg: HTMLDivElement | null) {
+        if (msg) {
+            msg.classList.add("displayed");
+        }
+    }
+    function closeFullscreenMsg(msg: HTMLDivElement | null) {
+        if (msg) {
+            msg.classList.remove("displayed");
+        }
+    }
+    const exitImage = require("../images/exit.svg").default;
 
     return (
         <div className="Products">
@@ -85,28 +102,54 @@ function Cart() {
                                         <div className="quantity">
                                             <div
                                                 className="plus unselectable"
-                                                onClick={()=>dispatch(increaseItemQuantity(i.product.id))}
+                                                onClick={() =>
+                                                    dispatch(
+                                                        increaseItemQuantity(
+                                                            i.product.id
+                                                        )
+                                                    )
+                                                }
                                             >
                                                 +
                                             </div>
                                             <div className="input">
                                                 <input value={i.quantity} />
                                             </div>
-                                            <div className="minus unselectable"
-                                            onClick={()=>dispatch(decreaseItemQuantity(i.product.id))}
-                                            >-</div>
+                                            <div
+                                                className="minus unselectable"
+                                                onClick={() =>
+                                                    dispatch(
+                                                        decreaseItemQuantity(
+                                                            i.product.id
+                                                        )
+                                                    )
+                                                }
+                                            >
+                                                -
+                                            </div>
                                         </div>
                                     </div>
                                     <div className="item-total">
-                                        {(i.product.price * i.quantity).toFixed(1)} руб.
+                                        {(i.product.price * i.quantity).toFixed(
+                                            1
+                                        )}{" "}
+                                        руб.
                                     </div>
-                                    <div className="item-delete" onClick={()=> dispatch(removeItem(i.product.id))}>
+                                    <div
+                                        className="item-delete"
+                                        onClick={() =>
+                                            dispatch(removeItem(i.product.id))
+                                        }
+                                    >
                                         <img src={trashImage} alt="" />
                                     </div>
                                 </div>
                             ))}
 
-                            <div className="clear-cart" onClick={()=> dispatch(clearCart())}>
+                            <div
+                                className="clear-cart"
+                                onClick={() => dispatch(clearCart())}
+                            >
                                 <a>
                                     <img src={trashImage} alt="" /> Очистить
                                     корзину
@@ -124,19 +167,39 @@ function Cart() {
                                 </div>
                                 <div className="input-group">
                                     <img src={userImage} alt="" />
-                                    <input placeholder="ФИО" value={name} onChange={(e)=> setName(e.target.value)}/>
-                                </div> 
+                                    <input
+                                        placeholder="ФИО"
+                                        value={name}
+                                        onChange={(e) =>
+                                            setName(e.target.value)
+                                        }
+                                    />
+                                </div>
                                 <div className="input-group">
                                     <img src={phoneImage} alt="" />
-                                    <input placeholder="Контактный телефон" value={tel} onChange={(e)=> setTel(e.target.value)}/>
+                                    <input
+                                        placeholder="Контактный телефон"
+                                        value={tel}
+                                        onChange={(e) => setTel(e.target.value)}
+                                    />
                                 </div>
                                 <div className="input-group">
                                     <img src={emailImage} alt="" />
-                                    <input placeholder="Email" value={email} onChange={(e)=> setEmail(e.target.value)}/>
+                                    <input
+                                        placeholder="Email"
+                                        value={email}
+                                        onChange={(e) =>
+                                            setEmail(e.target.value)
+                                        }
+                                    />
                                 </div>
                                 <div className="input-group">
                                     <img src={orgImage} alt="" />
-                                    <input placeholder="Организация / ИНН" value={org} onChange={(e)=> setOrg(e.target.value)}/>
+                                    <input
+                                        placeholder="Организация / ИНН"
+                                        value={org}
+                                        onChange={(e) => setOrg(e.target.value)}
+                                    />
                                 </div>
                             </div>
                             <div className="order-total">
@@ -156,11 +219,11 @@ function Cart() {
                             </div>
                             <div className="order-buttons">
                                 <div className="order-create">
-                                    <button>
+                                    <button onClick={() => createOrder()}>
                                         <div className="img-box">
                                             <img src={cartImage} alt="" />
                                         </div>
-                                        <div className="text-box" onClick={(e)=>createOrder()}>
+                                        <div className="text-box">
                                             Оформить заказ
                                         </div>
                                     </button>
@@ -180,9 +243,68 @@ function Cart() {
                     </div>
                 ) : (
                     <div className="empty-cart">
-                        <h3>Корзина пуста. Добавьте что-нибудь из <Link to="/shop-bastion/">каталога</Link></h3>
+                        <h3>
+                            Корзина пуста. Добавьте что-нибудь из{" "}
+                            <Link to="/shop-bastion/">каталога</Link>
+                        </h3>
                     </div>
                 )}
+            </div>
+            <div
+                className="fullscreen-msg"
+                onClick={() =>
+                    closeFullscreenMsg(
+                        document.querySelector(".fullscreen-msg")
+                    )
+                }
+            >
+                <div className="msg" onClick={(e) => e.stopPropagation()}>
+                    <div className="msg-title">
+                        <div className="msg-title-text">
+                            Спасибо за ваш заказ
+                        </div>
+                        <div
+                            className="msg-title-exit"
+                            onClick={() =>
+                                closeFullscreenMsg(
+                                    document.querySelector(".fullscreen-msg")
+                                )
+                            }
+                        >
+                            <img src={exitImage} alt="" />
+                        </div>
+                    </div>
+                    <div className="msg-content">
+                        <div className="msg-content-right">
+                            <div className="msg-content-text">
+                                <div className="msg-content-main">
+                                    <div className="msg-content-name">
+                                        В ближайшее время менеджеры свяжутся с
+                                        вами для уточнения деталей
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="msg-content-actions">
+                                <div className="order-create">
+                                    <Link to="/shop-bastion/">
+                                        <button>
+                                            <div className="text-box">
+                                                Продолжить покупки
+                                            </div>
+                                        </button>
+                                    </Link>
+                                </div>
+                                <div className="order-commercial">
+                                    <button>
+                                        <div className="text-box">
+                                            Добавить сайт в избранное
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

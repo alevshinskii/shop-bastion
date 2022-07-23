@@ -269,4 +269,94 @@
 }
 .Products .container .empty-cart a {
   color: #c93e33;
+}
+.Products .displayed {
+  visibility: visible !important;
+}
+.Products .fullscreen-msg {
+  visibility: hidden;
+  position: fixed;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Products .fullscreen-msg .msg {
+  background-color: #ffffff;
+  box-shadow: 0px 12px 12px 4px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  z-index: 101;
+}
+.Products .fullscreen-msg .msg .msg-title {
+  border-bottom: 1px solid #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 30px;
+}
+.Products .fullscreen-msg .msg .msg-title .msg-title-text {
+  font-weight: 500;
+  font-size: 18px;
+}
+.Products .fullscreen-msg .msg .msg-title .msg-title-exit {
+  cursor: pointer;
+}
+.Products .fullscreen-msg .msg .msg-title .msg-title-exit img {
+  width: 100%;
+  height: auto;
+}
+.Products .fullscreen-msg .msg .msg-content {
+  display: flex;
+  padding: 20px 30px 40px;
+}
+.Products .fullscreen-msg .msg .msg-content .msg-content-right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.Products .fullscreen-msg .msg .msg-content .msg-content-right .msg-content-text .msg-content-main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 30px 0px 40px;
+}
+.Products .fullscreen-msg .msg .msg-content .msg-content-right .msg-content-text .msg-content-main .msg-content-name {
+  width: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  text-align: center;
+}
+.Products .fullscreen-msg .msg .msg-content .msg-content-right .msg-content-actions {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.Products .fullscreen-msg .msg .msg-content .msg-content-right .msg-content-actions > * {
+  width: 48%;
+}
+.Products .fullscreen-msg .msg .msg-content .msg-content-right .msg-content-actions > * button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 15px 35px;
+  border-radius: 4px;
+  text-align: center;
+  height: 50px;
+}
+.Products .fullscreen-msg .msg .msg-content .msg-content-right .msg-content-actions > * button .text-box {
+  width: 100%;
+}
+.Products .fullscreen-msg .msg .msg-content .msg-content-right .msg-content-actions .order-create button {
+  background: #c93e33;
+  color: #ffffff;
+}
+.Products .fullscreen-msg .msg .msg-content .msg-content-right .msg-content-actions .order-commercial button {
+  background: #ffffff;
+  border: 1px solid #c93e33;
+  color: #c93e33;
 }/*# sourceMappingURL=cart.css.map */
