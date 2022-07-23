@@ -53,7 +53,7 @@ function Cart() {
                     <label>Главная</label>
                     <img src={arrowImage} alt="" />
                     <label>
-                        <Link to="/">Интернет-магазин</Link>
+                        <Link to="/shop-bastion/">Интернет-магазин</Link>
                     </label>
                     <img src={arrowImage} alt="" />
                     <label className="current">Корзина</label>
@@ -180,7 +180,7 @@ function Cart() {
                     </div>
                 ) : (
                     <div className="empty-cart">
-                        <h3>Корзина пуста. Добавьте что-нибудь из <Link to="/">каталога</Link></h3>
+                        <h3>Корзина пуста. Добавьте что-нибудь из <Link to="/shop-bastion/">каталога</Link></h3>
                     </div>
                 )}
             </div>

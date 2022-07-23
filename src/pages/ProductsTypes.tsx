@@ -32,13 +32,13 @@ function ProductsTypes() {
                     <label>Главная</label>
                     <img src={arrowImage} alt="" />
                     <label>
-                        <Link to="/">Интернет-магазин</Link>
+                        <Link to="/shop-bastion/">Интернет-магазин</Link>
                     </label>
                     <img src={arrowImage} alt="" />
                     <label className="current">Добавление типа продукта</label>
                 </div>
                 <div className="page-name">
-                    <Link to="/">
+                    <Link to="/shop-bastion/">
                         <img src={arrowBackImage} alt="" />
                     </Link>
                     <h2>Добавление типа продукта</h2>

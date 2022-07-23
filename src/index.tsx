@@ -23,10 +23,10 @@ root.render(
             <Router>
                 <Header />
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="products" element={<Products />} />
-                    <Route path="products_types" element={<ProductsTypes />} />
-                    <Route path="cart" element={<Cart />} />
+                    <Route path="/shop-bastion/" element={<Home />} />
+                    <Route path="/shop-bastion/products" element={<Products />} />
+                    <Route path="/shop-bastion/products_types" element={<ProductsTypes />} />
+                    <Route path="/shop-bastion/cart" element={<Cart />} />
                 </Routes>
                 <Footer />
             </Router>

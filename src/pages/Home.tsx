@@ -277,7 +277,7 @@ function Home() {
                                             </div>
                                         ) : (
                                             <div className="add">
-                                                <Link to="cart">
+                                                <Link to="/shop-bastion/cart">
                                                     <button>
                                                         Перейти в корзину
                                                     </button>

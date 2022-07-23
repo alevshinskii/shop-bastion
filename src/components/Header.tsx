@@ -25,8 +25,8 @@ function Header() {
             <div className="nav">
                 <div className="container">
                     <div className="nav-left">
-                        <Link to="/products">Продукты</Link>
-                        <Link to="/products_types">Типы продуктов</Link>
+                        <Link to="/shop-bastion/products">Продукты</Link>
+                        <Link to="/shop-bastion/products_types">Типы продуктов</Link>
                     </div>
                     <div className="nav-right">
                         <div className="phone">
@@ -76,7 +76,7 @@ function Header() {
             <div className="main-nav">
                 <div className="container">
                     <div className="left">
-                        <Link to="/">
+                        <Link to="/shop-bastion/">
                             <div className="brand">
                                 <img src={logoImage} alt="logo" />
                                 <h1>Производитель металлических изделий №1</h1>
@@ -105,7 +105,7 @@ function Header() {
                             <img src={favouriteImage} />
                             <h3>Избранное</h3>
                         </div>
-                        <Link to="/cart">
+                        <Link to="/shop-bastion/cart">
                             <div className="cart">
                                 <img src={cartImage}></img>
                                 <h3>Корзина</h3>
