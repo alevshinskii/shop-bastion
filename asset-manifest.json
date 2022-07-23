@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/shop-bastion/static/css/main.e5bc3891.css",
-    "main.js": "/shop-bastion/static/js/main.0c9f3554.js",
+    "main.js": "/shop-bastion/static/js/main.5e774dc3.js",
     "static/media/footer.png": "/shop-bastion/static/media/footer.32359a9e9adf49aadbb0.png",
     "static/media/item1.png": "/shop-bastion/static/media/item1.8706c015ad910008237e.png",
     "static/media/contact.png": "/shop-bastion/static/media/contact.f382f62a67baa8e0e595.png",
@@ -33,10 +33,10 @@
     "static/media/arrow.svg": "/shop-bastion/static/media/arrow.e22162696ae1ca7f41c671f3854f7c5b.svg",
     "static/media/arrow-hide.svg": "/shop-bastion/static/media/arrow-hide.8e48e66af3f463f19b19f44611eadd32.svg",
     "main.e5bc3891.css.map": "/shop-bastion/static/css/main.e5bc3891.css.map",
-    "main.0c9f3554.js.map": "/shop-bastion/static/js/main.0c9f3554.js.map"
+    "main.5e774dc3.js.map": "/shop-bastion/static/js/main.5e774dc3.js.map"
   },
   "entrypoints": [
     "static/css/main.e5bc3891.css",
-    "static/js/main.0c9f3554.js"
+    "static/js/main.5e774dc3.js"
   ]
 }
