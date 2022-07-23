@@ -41,6 +41,9 @@
   font-size: 16px;
   margin-bottom: 200px;
 }
+.Products .container .page-content .warning {
+  background-color: rgba(201, 61, 51, 0.1450980392) !important;
+}
 .Products .container .page-content .input-group {
   display: flex;
   align-items: center;
@@ -51,8 +54,9 @@
   display: block;
   width: 10%;
 }
-.Products .container .page-content .input-group input, .Products .container .page-content .input-group select {
-  background: #ffffff;
+.Products .container .page-content .input-group input,
+.Products .container .page-content .input-group select {
+  background: transparent;
   border: 1px solid #e6e6e6;
   border-radius: 2px;
   padding: 5px 10px;

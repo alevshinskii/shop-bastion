@@ -12,7 +12,7 @@ function Products() {
     const arrowBackImage = require("../images/arrow-back.svg").default;
 
     const [nameString, setName] = useState("");
-    const [type, setType] = useState(1);
+    const [type, setType] = useState(0);
     const [price, setPrice] = useState(1);
     const [gostString, setGost] = useState("");
 
@@ -22,12 +22,17 @@ function Products() {
 
     const dispatch = useAppDispatch();
 
-    const addProductBtnClick = () => {
-        if (type && nameString && gostString) {
-            const selectedType = types.find(
-                (t) => t.id == type
-            ) as IProductType;
+    function showInvalidField(element: HTMLDivElement | HTMLSelectElement) {
+        element.classList.add("warning");
+        element.focus();
+        setTimeout(function () {
+            element.classList.remove("warning");
+        }, 2000);
+    }
 
+    const addProductBtnClick = () => {
+        const selectedType = types.find((t) => t.id == type);
+        if (type && nameString && gostString && selectedType) {
             const hit =
                 nameString
                     .toLowerCase()
@@ -69,6 +74,28 @@ function Products() {
                 dispatch(
                     updatePriceFilter({ min: price, max: filter.price.max })
                 );
+        } else {
+            if (!gostString) {
+                const gostInput: HTMLInputElement | null =
+                    document.querySelector(".input-gost");
+                if (gostInput) {
+                    showInvalidField(gostInput);
+                }
+            }
+            if (!selectedType) {
+                const typeInput: HTMLSelectElement | null =
+                    document.querySelector(".input-type");
+                if (typeInput) {
+                    showInvalidField(typeInput);
+                }
+            }
+            if (!nameString) {
+                const nameInput: HTMLInputElement | null =
+                    document.querySelector(".input-name");
+                if (nameInput) {
+                    showInvalidField(nameInput);
+                }
+            }
         }
     };
 
@@ -94,6 +121,7 @@ function Products() {
                     <div className="input-group">
                         <label>Название</label>
                         <input
+                            className="input-name"
                             value={nameString}
                             onChange={(e) => {
                                 setName(e.target.value);
@@ -103,13 +131,14 @@ function Products() {
                     <div className="input-group">
                         <label>Тип</label>
                         <select
+                            className="input-type"
                             onChange={(
                                 e: React.ChangeEvent<HTMLSelectElement>
                             ) => {
                                 setType(Number(e.target.selectedIndex));
                             }}
                         >
-                            <option disabled selected id={"0"}>
+                            <option selected id={"0"}>
                                 Выберите тип
                             </option>
                             {types.map((t) => (
@@ -120,6 +149,7 @@ function Products() {
                     <div className="input-group">
                         <label>Цена</label>
                         <input
+                            className="input-price"
                             type={"number"}
                             min={1}
                             max={9999999999999999}
@@ -132,6 +162,7 @@ function Products() {
                     <div className="input-group">
                         <label>ГОСТ</label>
                         <input
+                            className="input-gost"
                             value={gostString}
                             onChange={(e) => {
                                 setGost(e.target.value);

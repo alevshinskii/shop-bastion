@@ -45,22 +45,25 @@
             font-weight: 500;
             font-size: 16px;
             margin-bottom: 200px;
-
+            .warning {
+                background-color: #c93d3325 !important;
+            }
             .input-group {
                 display: flex;
                 align-items: center;
                 padding: 15px 35px;
                 border-bottom: 1px solid #e6e6e6;
-                label{
+                label {
                     display: block;
-                    width:10%;
+                    width: 10%;
                 }
-                input , select {
-                    background: #ffffff;
+                input,
+                select {
+                    background: transparent;
                     border: 1px solid #e6e6e6;
                     border-radius: 2px;
                     padding: 5px 10px;
-                    width:30%;
+                    width: 30%;
                     text-align: center;
                 }
             }
