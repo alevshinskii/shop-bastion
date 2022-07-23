@@ -85,7 +85,7 @@
                         align-items: center;
                         justify-content: space-between;
 
-                        margin-bottom: 10px;
+                        margin-bottom: 20px;
 
                         .text {
                             position: absolute;
@@ -127,6 +127,9 @@
                         align-items: center;
                         margin: 20px;
                         margin-top: 10px;
+                        .slider-component{
+                            width: 100%;
+                        }
                         img {
                             margin-top: 5px;
                             width: 80%;

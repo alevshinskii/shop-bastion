@@ -78,7 +78,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   position: relative;
 }
 .Home .container .page-content .filters .filter-price .inputs .text {
@@ -127,6 +127,9 @@
   align-items: center;
   margin: 20px;
   margin-top: 10px;
+}
+.Home .container .page-content .filters .filter-price .slider-block .slider-component {
+  width: 100%;
 }
 .Home .container .page-content .filters .filter-price .slider-block img {
   margin-top: 5px;
