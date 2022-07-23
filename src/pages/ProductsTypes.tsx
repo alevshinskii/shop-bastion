@@ -15,14 +15,29 @@ function ProductsTypes() {
     const { types } = useAppSelector((state) => state.productTypeSlice);
     const dispatch = useAppDispatch();
 
+    function showInvalidField(element: HTMLDivElement | HTMLSelectElement) {
+        element.classList.add("warning");
+        element.focus();
+        setTimeout(function () {
+            element.classList.remove("warning");
+        }, 2000);
+    }
+
     const addProductType = () => {
-        const productType: IProductType = {
-            id: types.length + 1,
-            name,
-        };
-        setName("");
-        dispatch(addType(productType));
-        dispatch(addTypeFilter({ type: productType, use: false }));
+        if (name) {
+            const productType: IProductType = {
+                id: types.length + 1,
+                name,
+            };
+            setName("");
+            dispatch(addType(productType));
+            dispatch(addTypeFilter({ type: productType, use: false }));
+        } else {
+            const nameInput:HTMLInputElement|null=document.querySelector(".input-name");
+            if(nameInput){
+                showInvalidField(nameInput)
+            }
+        }
     };
 
     return (
@@ -47,6 +62,7 @@ function ProductsTypes() {
                     <div className="input-group">
                         <label>Название</label>
                         <input
+                            className="input-name"
                             value={name}
                             onChange={(e) => {
                                 setName(e.target.value);
