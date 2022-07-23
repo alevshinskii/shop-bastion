@@ -173,6 +173,9 @@
   font-size: 15px;
   color: #b3b3b3;
 }
+.Products .container .page-content-cart .order .order-info .warning {
+  background-color: rgba(201, 61, 51, 0.1450980392);
+}
 .Products .container .page-content-cart .order .order-info .input-group {
   display: flex;
   align-items: center;
@@ -181,6 +184,7 @@
   border-bottom: 1px solid #e6e6e6;
 }
 .Products .container .page-content-cart .order .order-info .input-group input {
+  background-color: transparent;
   width: 80%;
   font-weight: 400;
   font-size: 15px;

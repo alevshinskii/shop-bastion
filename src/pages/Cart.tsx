@@ -30,27 +30,92 @@ function Cart() {
     const { cart } = useAppSelector((state) => state.cartSlice);
     const dispatch = useAppDispatch();
 
-    function createOrder() {
-        if (name && tel && email) {
-            const total = +cart.items
-                .reduce(
-                    (prev, cur) => prev + cur.product.price * cur.quantity,
-                    0
-                )
-                .toFixed(1);
-            const order: IOrder = {
-                id: Date.now(),
-                name,
-                tel,
-                email,
-                org: org,
-                cart,
-                total,
-            };
+    function validatePhoneString(phone: String) {
+        let count = 0;
+        phone.split("").forEach((l) => {
+            if (l <= "9" && l >= "0") {
+                count++;
+            }
+        });
+        if (count == 10 || count == 11) {
+            return true;
+        }
+        return false;
+    }
+    function validateEmail(email: string) {
+        const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/g;
+        return regex.test(email);
+    }
+
+    function showInvalidField(element: HTMLDivElement) {
+
+        console.log(element)
+        element.classList.add("warning");
+        element.focus();
+        setTimeout(function () {
+            element.classList.remove("warning");
+        }, 2000);
+    }
+
+    function validateOrder(order: IOrder) {
+        if (!order.org) {
+            const orgInput: HTMLDivElement | null =
+                document.querySelector(".input-org");
+            if (orgInput) {
+                showInvalidField(orgInput);
+            }
+            return false;
+        }
+
+        if (!validateEmail(order.email)) {
+            const emailInput: HTMLDivElement | null =
+                document.querySelector(".input-email");
+            if (emailInput) {
+                showInvalidField(emailInput);
+            }
+            return false;
+        }
+        if (!validatePhoneString(order.tel)) {
+            const phoneInput: HTMLDivElement | null =
+                document.querySelector(".input-phone");
+            if (phoneInput) {
+                showInvalidField(phoneInput);
+            }
+            return false;
+        }
+        if (!order.name) {
+            const nameInput: HTMLDivElement | null =
+                document.querySelector(".input-name");
+            if (nameInput) {
+                showInvalidField(nameInput);
+            }
+            return false;
+        }
+        return true;
+    }
+    function createOrder(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        e.preventDefault();
+
+        const total = +cart.items
+            .reduce((prev, cur) => prev + cur.product.price * cur.quantity, 0)
+            .toFixed(1);
+
+        const order: IOrder = {
+            id: Date.now(),
+            name,
+            tel,
+            email,
+            org: org,
+            cart,
+            total,
+        };
+
+        if (validateOrder(order)) {
             openFullscreenMsg(document.querySelector(".fullscreen-msg"));
             console.log(order);
         }
     }
+
     function openFullscreenMsg(msg: HTMLDivElement | null) {
         if (msg) {
             msg.classList.add("displayed");
@@ -158,87 +223,96 @@ function Cart() {
                         </div>
 
                         <div className="order">
-                            <div className="order-name">
-                                <h3>Заказ</h3>
-                            </div>
-                            <div className="order-info">
-                                <div className="head">
-                                    Контактная информация
+                            <form>
+                                <div className="order-name">
+                                    <h3>Заказ</h3>
                                 </div>
-                                <div className="input-group">
-                                    <img src={userImage} alt="" />
-                                    <input
-                                        placeholder="ФИО"
-                                        value={name}
-                                        onChange={(e) =>
-                                            setName(e.target.value)
-                                        }
-                                    />
+                                <div className="order-info">
+                                    <div className="head">
+                                        Контактная информация
+                                    </div>
+                                    <div className="input-group input-name">
+                                        <img src={userImage} alt="" />
+                                        <input
+                                            placeholder="ФИО"
+                                            value={name}
+                                            onChange={(e) =>
+                                                setName(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="input-group input-phone">
+                                        <img src={phoneImage} alt="" />
+                                        <input
+                                            placeholder="Контактный телефон"
+                                            value={tel}
+                                            onChange={(e) =>
+                                                setTel(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="input-group input-email">
+                                        <img src={emailImage} alt="" />
+                                        <input
+                                            placeholder="Email"
+                                            value={email}
+                                            onChange={(e) =>
+                                                setEmail(e.target.value)
+                                            }
+                                        />
+                                    </div>
+                                    <div className="input-group input-org">
+                                        <img src={orgImage} alt="" />
+                                        <input
+                                            placeholder="Организация / ИНН"
+                                            value={org}
+                                            onChange={(e) =>
+                                                setOrg(e.target.value)
+                                            }
+                                        />
+                                    </div>
                                 </div>
-                                <div className="input-group">
-                                    <img src={phoneImage} alt="" />
-                                    <input
-                                        placeholder="Контактный телефон"
-                                        value={tel}
-                                        onChange={(e) => setTel(e.target.value)}
-                                    />
+                                <div className="order-total">
+                                    <div className="total">Итого</div>
+                                    <div className="price">
+                                        {cart.items
+                                            .reduce(
+                                                (prev, cur) =>
+                                                    prev +
+                                                    cur.product.price *
+                                                        cur.quantity,
+                                                0
+                                            )
+                                            .toFixed(1)}{" "}
+                                        руб.
+                                    </div>
                                 </div>
-                                <div className="input-group">
-                                    <img src={emailImage} alt="" />
-                                    <input
-                                        placeholder="Email"
-                                        value={email}
-                                        onChange={(e) =>
-                                            setEmail(e.target.value)
-                                        }
-                                    />
+                                <div className="order-buttons">
+                                    <div className="order-create">
+                                        <button onClick={(e) => createOrder(e)}>
+                                            <div className="img-box">
+                                                <img src={cartImage} alt="" />
+                                            </div>
+                                            <div className="text-box">
+                                                Оформить заказ
+                                            </div>
+                                        </button>
+                                    </div>
+                                    <div className="order-commercial">
+                                        <button onClick={() => {}}>
+                                            <div className="img-box">
+                                                <img
+                                                    src={commercialImage}
+                                                    alt=""
+                                                />
+                                            </div>
+                                            <div className="text-box">
+                                                Коммерческое предложение
+                                            </div>
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className="input-group">
-                                    <img src={orgImage} alt="" />
-                                    <input
-                                        placeholder="Организация / ИНН"
-                                        value={org}
-                                        onChange={(e) => setOrg(e.target.value)}
-                                    />
-                                </div>
-                            </div>
-                            <div className="order-total">
-                                <div className="total">Итого</div>
-                                <div className="price">
-                                    {cart.items
-                                        .reduce(
-                                            (prev, cur) =>
-                                                prev +
-                                                cur.product.price *
-                                                    cur.quantity,
-                                            0
-                                        )
-                                        .toFixed(1)}{" "}
-                                    руб.
-                                </div>
-                            </div>
-                            <div className="order-buttons">
-                                <div className="order-create">
-                                    <button onClick={() => createOrder()}>
-                                        <div className="img-box">
-                                            <img src={cartImage} alt="" />
-                                        </div>
-                                        <div className="text-box">
-                                            Оформить заказ
-                                        </div>
-                                    </button>
-                                </div>
-                                <div className="order-commercial">
-                                    <button>
-                                        <div className="img-box">
-                                            <img src={commercialImage} alt="" />
-                                        </div>
-                                        <div className="text-box">
-                                            Коммерческое предложение
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 ) : (

@@ -186,6 +186,9 @@
                         font-size: 15px;
                         color: #b3b3b3;
                     }
+                    .warning {
+                        background-color: #c93d3325;
+                    }
                     .input-group {
                         display: flex;
                         align-items: center;
@@ -193,6 +196,7 @@
                         margin-bottom: 20px;
                         border-bottom: 1px solid #e6e6e6;
                         input {
+                            background-color: transparent;
                             width: 80%;
                             font-weight: 400;
                             font-size: 15px;
@@ -243,7 +247,7 @@
                                     width: auto;
                                 }
                             }
-                            .text-box{
+                            .text-box {
                                 width: 70%;
                             }
                         }
@@ -265,15 +269,13 @@
                     }
                 }
             }
-
-            
         }
-        .empty-cart{
+        .empty-cart {
             padding: 20px 30px;
             font-size: 24px;
             font-weight: 500;
             background-color: white;
-            a{
+            a {
                 color: #c93e33;
             }
             margin-bottom: 600px;
@@ -340,7 +342,7 @@
                     }
                     .msg-content-actions {
                         display: flex;
-                        align-items:flex-end;
+                        align-items: flex-end;
                         justify-content: space-between;
                         & > * {
                             width: 48%;
@@ -351,7 +353,7 @@
                                 padding: 15px 35px;
                                 border-radius: 4px;
                                 text-align: center;
-                                .text-box{
+                                .text-box {
                                     width: 100%;
                                 }
                                 height: 50px;
