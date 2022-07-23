@@ -84,7 +84,7 @@ function Cart() {
                                     <div className="item-quantity">
                                         <div className="quantity">
                                             <div
-                                                className="plus"
+                                                className="plus unselectable"
                                                 onClick={()=>dispatch(increaseItemQuantity(i.product.id))}
                                             >
                                                 +
@@ -92,7 +92,7 @@ function Cart() {
                                             <div className="input">
                                                 <input value={i.quantity} />
                                             </div>
-                                            <div className="minus"
+                                            <div className="minus unselectable"
                                             onClick={()=>dispatch(decreaseItemQuantity(i.product.id))}
                                             >-</div>
                                         </div>

@@ -76,6 +76,14 @@ h1, h2, h3, h4, h5, h6 {
   width: 76%;
 }
 
+.unselectable {
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+      user-select: none;
+}
+
 .root {
   font-family: "Fira Sans", sans-serif;
   background-color: #e6e6e6;

@@ -172,7 +172,7 @@ function Home() {
                         <div className="gosts">
                             {filter.gost.map((g) => (
                                 <div
-                                    className={g.use ? "rect selected" : "rect"}
+                                    className={g.use ? "rect selected unselectable" : "rect unselectable"}
                                     key={g.gost.id}
                                     onClick={() =>
                                         dispatch(toggleGostFilter(g.gost.id))
@@ -215,7 +215,7 @@ function Home() {
                                         {isProductInCart(p.id) ? (
                                             <div className="quantity">
                                                 <div
-                                                    className="plus"
+                                                    className="plus unselectable"
                                                     onClick={() =>
                                                         dispatch(
                                                             increaseItemQuantity(
@@ -228,6 +228,7 @@ function Home() {
                                                 </div>
                                                 <div className="input">
                                                     <input
+                                                    type={'number'}
                                                         value={
                                                             cart.items.find(
                                                                 (i) =>
@@ -236,10 +237,12 @@ function Home() {
                                                                     p.id
                                                             )?.quantity
                                                         }
+                                                        min={1}
+                                                        max={100}
                                                     />
                                                 </div>
                                                 <div
-                                                    className="minus"
+                                                    className="minus unselectable"
                                                     onClick={() =>
                                                         dispatch(
                                                             decreaseItemQuantity(

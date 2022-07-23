@@ -197,6 +197,7 @@
   margin-left: 5px;
   margin-right: 5px;
   padding: 7px;
+  cursor: pointer;
 }
 .Home .container .page-content .products .gosts .selected {
   background: #c93e33;
@@ -295,6 +296,10 @@
   position: absolute;
   border-right: 1px solid #e6e6e6;
   padding: 6px 10px;
+  cursor: pointer;
+}
+.Home .container .page-content .products .products-list .product .price .quantity .input {
+  width: 100%;
 }
 .Home .container .page-content .products .products-list .product .price .quantity .input input {
   padding: 6px;
@@ -304,11 +309,19 @@
   width: 100%;
   text-align: center;
 }
+.Home .container .page-content .products .products-list .product .price .quantity .input input::-webkit-outer-spin-button, .Home .container .page-content .products .products-list .product .price .quantity .input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.Home .container .page-content .products .products-list .product .price .quantity .input input[type=number] {
+  -moz-appearance: textfield;
+}
 .Home .container .page-content .products .products-list .product .price .quantity .minus {
   border-left: 1px solid #e6e6e6;
   position: absolute;
   right: 0;
   padding: 6px 10px;
+  cursor: pointer;
 }
 .Home .container .page-content .products .products-list .product .buy-menu {
   display: none;
