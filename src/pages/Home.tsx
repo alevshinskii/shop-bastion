@@ -17,6 +17,7 @@ import {
 } from "../reducers/FilterSlice";
 import { ITypeFilter } from "../models/ITypeFilter";
 import { IGostFilter } from "../models/IGostFilter";
+import { useState } from "react";
 
 function Home() {
     const arrowImage = require("../images/arrow.svg").default;
@@ -28,6 +29,10 @@ function Home() {
     const sliderMarksImage = require("../images/slider-marks.svg").default;
     const arrowPagesImage = require("../images/arrow-pages.svg").default;
     const arrowHideImage = require("../images/arrow-hide.svg").default;
+    const exitImage = require("../images/exit.svg").default;
+
+    const cartImage = require("../images/cart-order.svg").default;
+    const commercialImage = require("../images/commercial-order.svg").default;
 
     const itemImage = require("../content/item1.png");
 
@@ -36,6 +41,8 @@ function Home() {
     const { cart } = useAppSelector((state) => state.cartSlice);
     const { filter } = useAppSelector((state) => state.filterSlice);
     const dispatch = useAppDispatch();
+
+    const [isFirstTimeClickBuyBtn, setFirstTimeClickButBtn] = useState(true);
 
     let minPrice = Number.MAX_VALUE,
         maxPrice = 0;
@@ -102,6 +109,21 @@ function Home() {
             })
         );
     }
+
+    function openFullscreenMsg(msg: HTMLDivElement | null) {
+        if (msg) {
+            msg.classList.add("displayed");
+
+            console.log(msg.classList);
+        }
+    }
+    function closeFullscreenMsg(msg: HTMLDivElement | null) {
+        if (msg) {
+            msg.classList.remove("displayed");
+        }
+        console.log("close");
+    }
+
     return (
         <div className="Home">
             <div className="container">
@@ -172,7 +194,11 @@ function Home() {
                         <div className="gosts">
                             {filter.gost.map((g) => (
                                 <div
-                                    className={g.use ? "rect selected unselectable" : "rect unselectable"}
+                                    className={
+                                        g.use
+                                            ? "rect selected unselectable"
+                                            : "rect unselectable"
+                                    }
                                     key={g.gost.id}
                                     onClick={() =>
                                         dispatch(toggleGostFilter(g.gost.id))
@@ -182,7 +208,7 @@ function Home() {
                                 </div>
                             ))}
                         </div>
-                        
+
                         <div className="products-list">
                             {getFilteredProducts(products).map((p) => (
                                 <div className="product" key={p.id}>
@@ -228,7 +254,7 @@ function Home() {
                                                 </div>
                                                 <div className="input">
                                                     <input
-                                                    type={'number'}
+                                                        type={"number"}
                                                         value={
                                                             cart.items.find(
                                                                 (i) =>
@@ -262,14 +288,28 @@ function Home() {
                                         {!isProductInCart(p.id) ? (
                                             <div className="add">
                                                 <button
-                                                    onClick={() =>
+                                                    onClick={() => {
+                                                        if (
+                                                            isFirstTimeClickBuyBtn
+                                                        ) {
+                                                            setFirstTimeClickButBtn(
+                                                                false
+                                                            );
+                                                            const msg: HTMLDivElement | null =
+                                                                document.querySelector(
+                                                                    ".fullscreen-msg"
+                                                                );
+                                                            openFullscreenMsg(
+                                                                msg
+                                                            );
+                                                        }
                                                         dispatch(
                                                             addItem({
                                                                 product: p,
                                                                 quantity: 1,
                                                             } as ICartItem)
-                                                        )
-                                                    }
+                                                        );
+                                                    }}
                                                 >
                                                     <img
                                                         src={addToCartImage}
@@ -363,6 +403,74 @@ function Home() {
                     <a>
                         Скрыть описание <img src={arrowHideImage} alt=""></img>
                     </a>
+                </div>
+            </div>
+            <div
+                className="fullscreen-msg"
+                onClick={() =>
+                    closeFullscreenMsg(
+                        document.querySelector(".fullscreen-msg")
+                    )
+                }
+            >
+                <div className="msg">
+                    <div className="msg-title">
+                        <div className="msg-title-text">
+                            Товар добавлен в корзину
+                        </div>
+                        <div
+                            className="msg-title-exit"
+                            onClick={() =>
+                                closeFullscreenMsg(
+                                    document.querySelector(".fullscreen-msg")
+                                )
+                            }
+                        >
+                            <img src={exitImage} alt="" />
+                        </div>
+                    </div>
+                    <div className="msg-content">
+                        <div className="msg-content-left">
+                            <div className="msg-img">
+                                <img src={itemImage} alt="item" />
+                            </div>
+                        </div>
+                        <div className="msg-content-right">
+                            <div className="msg-content-text">
+                                <div className="msg-content-gost">
+                                    <div className="gost-rect">
+                                        {cart.items[0]?.product.gost.name}
+                                    </div>
+                                </div>
+                                <div className="msg-content-main">
+                                    <div className="msg-content-name">
+                                        {cart.items[0]?.product.name}
+                                    </div>
+                                    <div className="msg-content-price">
+                                        {cart.items[0]?.product.price} руб.
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="msg-content-actions">
+                                <div className="order-create">
+                                    <Link to="/shop-bastion/cart">
+                                        <button>
+                                            <div className="text-box">
+                                                Оформить заказ
+                                            </div>
+                                        </button>
+                                    </Link>
+                                </div>
+                                <div className="order-commercial">
+                                    <button>
+                                        <div className="text-box">
+                                            Коммерческое предложение
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
