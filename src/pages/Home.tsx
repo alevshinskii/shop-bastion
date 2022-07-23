@@ -208,130 +208,142 @@ function Home() {
                         </div>
 
                         <div className="products-list">
-                            {getFilteredProducts(products).map((p) => (
-                                <div className="product" key={p.id}>
-                                    <div className="promos">
-                                        {p.hit ? (
-                                            <div className="hit">Хит</div>
-                                        ) : (
-                                            ""
-                                        )}
-                                        {p.promo ? (
-                                            <div className="promo">Акция</div>
-                                        ) : (
-                                            ""
-                                        )}
-                                    </div>
-                                    <div className="image">
-                                        <img src={itemImage} alt="item" />
-                                    </div>
-                                    <div className="gost">
-                                        <div className="gost-rect">
-                                            <label>{p.gost.name}</label>
-                                        </div>
-                                    </div>
-                                    <div className="name">{p.name}</div>
-                                    <div className="price">
-                                        <div className="price-amount">
-                                            {p.price} руб.
-                                        </div>
-
-                                        {isProductInCart(p.id) ? (
-                                            <div className="quantity">
-                                                <div
-                                                    className="plus unselectable"
-                                                    onClick={() =>
-                                                        dispatch(
-                                                            increaseItemQuantity(
-                                                                p.id
-                                                            )
-                                                        )
-                                                    }
-                                                >
-                                                    +
+                            {getFilteredProducts(products).length > 0 ? (
+                                getFilteredProducts(products).map((p) => (
+                                    <div className="product" key={p.id}>
+                                        <div className="promos">
+                                            {p.hit ? (
+                                                <div className="hit">Хит</div>
+                                            ) : (
+                                                ""
+                                            )}
+                                            {p.promo ? (
+                                                <div className="promo">
+                                                    Акция
                                                 </div>
-                                                <div className="input">
-                                                    <input
-                                                        type={"number"}
-                                                        value={
-                                                            cart.items.find(
-                                                                (i) =>
-                                                                    i.product
-                                                                        .id ===
+                                            ) : (
+                                                ""
+                                            )}
+                                        </div>
+                                        <div className="image">
+                                            <img src={itemImage} alt="item" />
+                                        </div>
+                                        <div className="gost">
+                                            <div className="gost-rect">
+                                                <label>{p.gost.name}</label>
+                                            </div>
+                                        </div>
+                                        <div className="name">{p.name}</div>
+                                        <div className="price">
+                                            <div className="price-amount">
+                                                {p.price} руб.
+                                            </div>
+
+                                            {isProductInCart(p.id) ? (
+                                                <div className="quantity">
+                                                    <div
+                                                        className="plus unselectable"
+                                                        onClick={() =>
+                                                            dispatch(
+                                                                increaseItemQuantity(
                                                                     p.id
-                                                            )?.quantity
-                                                        }
-                                                        min={1}
-                                                        max={100}
-                                                    />
-                                                </div>
-                                                <div
-                                                    className="minus unselectable"
-                                                    onClick={() =>
-                                                        dispatch(
-                                                            decreaseItemQuantity(
-                                                                p.id
+                                                                )
                                                             )
-                                                        )
-                                                    }
-                                                >
-                                                    -
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className="quantity"></div>
-                                        )}
-                                    </div>
-                                    <div className="buy-menu">
-                                        {!isProductInCart(p.id) ? (
-                                            <div className="add">
-                                                <button
-                                                    onClick={() => {
-                                                        if (
-                                                            isFirstTimeClickBuyBtn
-                                                        ) {
-                                                            setFirstTimeClickButBtn(
-                                                                false
-                                                            );
-                                                            const msg: HTMLDivElement | null =
-                                                                document.querySelector(
-                                                                    ".fullscreen-msg"
-                                                                );
-                                                            openFullscreenMsg(
-                                                                msg
-                                                            );
                                                         }
-                                                        dispatch(
-                                                            addItem({
-                                                                product: p,
-                                                                quantity: 1,
-                                                            } as ICartItem)
-                                                        );
-                                                    }}
-                                                >
-                                                    <img
-                                                        src={addToCartImage}
-                                                        alt=""
-                                                    ></img>
-                                                    В корзину
-                                                </button>
-                                            </div>
-                                        ) : (
-                                            <div className="add">
-                                                <Link to="/shop-bastion/cart">
-                                                    <button>
-                                                        Перейти в корзину
+                                                    >
+                                                        +
+                                                    </div>
+                                                    <div className="input">
+                                                        <input
+                                                            type={"number"}
+                                                            value={
+                                                                cart.items.find(
+                                                                    (i) =>
+                                                                        i
+                                                                            .product
+                                                                            .id ===
+                                                                        p.id
+                                                                )?.quantity
+                                                            }
+                                                            min={1}
+                                                            max={100}
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        className="minus unselectable"
+                                                        onClick={() =>
+                                                            dispatch(
+                                                                decreaseItemQuantity(
+                                                                    p.id
+                                                                )
+                                                            )
+                                                        }
+                                                    >
+                                                        -
+                                                    </div>
+                                                </div>
+                                            ) : (
+                                                <div className="quantity"></div>
+                                            )}
+                                        </div>
+                                        <div className="buy-menu">
+                                            {!isProductInCart(p.id) ? (
+                                                <div className="add">
+                                                    <button
+                                                        onClick={() => {
+                                                            if (
+                                                                isFirstTimeClickBuyBtn
+                                                            ) {
+                                                                setFirstTimeClickButBtn(
+                                                                    false
+                                                                );
+                                                                const msg: HTMLDivElement | null =
+                                                                    document.querySelector(
+                                                                        ".fullscreen-msg"
+                                                                    );
+                                                                openFullscreenMsg(
+                                                                    msg
+                                                                );
+                                                            }
+                                                            dispatch(
+                                                                addItem({
+                                                                    product: p,
+                                                                    quantity: 1,
+                                                                } as ICartItem)
+                                                            );
+                                                        }}
+                                                    >
+                                                        <img
+                                                            src={addToCartImage}
+                                                            alt=""
+                                                        ></img>
+                                                        В корзину
                                                     </button>
-                                                </Link>
-                                            </div>
-                                        )}
+                                                </div>
+                                            ) : (
+                                                <div className="add">
+                                                    <Link to="/shop-bastion/cart">
+                                                        <button>
+                                                            Перейти в корзину
+                                                        </button>
+                                                    </Link>
+                                                </div>
+                                            )}
 
-                                        <div className="desc">
-                                            <button>Подробнее</button>
+                                            <div className="desc">
+                                                <button>Подробнее</button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <h3>
+                                    Ничего не найдено. Попробуйте{" "}
+                                    <label onClick={() => resetAllFilters()}>
+                                        сбросить фильтры
+                                    </label>
+                                </h3>
+                            )}
                         </div>
                     </div>
                 </div>

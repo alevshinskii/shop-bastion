@@ -423,6 +423,15 @@
   font-weight: 500;
   font-size: 15px;
 }
+.Home .container .page-content .products .products-list h3 {
+  margin-top: 100px;
+  margin-left: 20%;
+  font-size: 24px;
+}
+.Home .container .page-content .products .products-list h3 label {
+  cursor: pointer;
+  color: #c93e33;
+}
 .Home .container .nav-through-items {
   display: flex;
   align-items: center;
